@@ -2,13 +2,18 @@ import CartView from "./CartView";
 
 export default function CartPage() {
   return (
-    <main className="min-h-screen bg-zinc-950 text-white flex items-center justify-center px-6 py-12">
-      <div className="max-w-xl w-full bg-zinc-900 p-8 rounded-2xl shadow-xl border border-zinc-800">
-        <h1 className="text-3xl font-bold mb-6 text-amber-500 text-center">
-          Your Cart
-        </h1>
+    <div className="min-h-[calc(100vh-140px)] bg-[#111111] text-white flex items-center justify-center px-4 py-12">
+      <div className="max-w-xl w-full bg-[#181615] p-8 sm:p-10 rounded-3xl shadow-2xl border border-[#2b2724]">
+        <div className="text-center mb-8">
+          <span className="text-amber-500 font-semibold text-xs tracking-widest uppercase mb-1 block">
+            Order Review
+          </span>
+          <h1 className="text-3xl font-extrabold text-white font-serif-display">
+            Your Cart
+          </h1>
+        </div>
         <CartView />
       </div>
-    </main>
+    </div>
   );
 }

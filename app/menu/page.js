@@ -10,10 +10,12 @@ function MenuSkeleton() {
     <div className="space-y-6 animate-pulse">
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {[1, 2, 3, 4, 5, 6].map((i) => (
-          <div key={i} className="h-56 bg-zinc-900 rounded-2xl p-6 space-y-4">
-            <div className="h-6 bg-zinc-800 rounded w-3/4" />
-            <div className="h-4 bg-zinc-800 rounded w-full" />
-            <div className="h-4 bg-zinc-800 rounded w-1/3" />
+          <div key={i} className="bg-[#181615] rounded-2xl overflow-hidden border border-[#2b2724] p-5 space-y-4">
+            <div className="h-44 bg-zinc-800/60 rounded-xl w-full" />
+            <div className="h-5 bg-zinc-800 rounded w-2/3" />
+            <div className="h-3 bg-zinc-800 rounded w-full" />
+            <div className="h-3 bg-zinc-800 rounded w-4/5" />
+            <div className="h-8 bg-zinc-800/80 rounded-lg w-full mt-4" />
           </div>
         ))}
       </div>
@@ -24,7 +26,8 @@ function MenuSkeleton() {
 export default async function MenuPage({ searchParams }) {
   const params = await searchParams;
   const selectedCategory = params?.category || "All";
-  const categories = ["All", ...new Set(listDishes.map((dish) => dish.category))];
+  const allDishes = listDishes();
+  const categories = ["All", ...new Set(allDishes.map((dish) => dish.category))];
 
   return (
     <FilterShell selectedCategory={selectedCategory} categories={categories}>

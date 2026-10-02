@@ -25,7 +25,7 @@ export async function submitOrder(input) {
   const session = (await getSession()) ?? (await createSession());
   const order = insertOrder({ ...parsed.data, userId: session.userId });
 
-  revalidatePath("/orders");       // refresh the cached kitchen board
+  revalidatePath("/orders");
   revalidatePath("/orders/mine");
   return { ok: true, status: 201, order: toOwnerOrder(order) };
 }

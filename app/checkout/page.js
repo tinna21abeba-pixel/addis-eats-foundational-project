@@ -7,12 +7,19 @@ export default async function CheckoutPage() {
   await cookies();
 
   return (
-    <div className="min-h-[calc(100vh-130px)] bg-zinc-950 text-white flex items-center justify-center px-6 py-12">
-      <div className="max-w-xl w-full bg-zinc-900 p-8 rounded-2xl shadow-xl border border-zinc-800">
-        <h1 className="text-4xl font-bold mb-2 text-amber-500 text-center">Checkout</h1>
-        <p className="text-zinc-300 mb-8 text-center">
-          Complete your order to enjoy delicious Ethiopian food.
-        </p>
+    <div className="min-h-[calc(100vh-140px)] bg-[#111111] text-white flex items-center justify-center px-4 py-12">
+      <div className="max-w-xl w-full bg-[#181615] p-8 sm:p-10 rounded-3xl shadow-2xl border border-[#2b2724]">
+        <div className="text-center mb-8">
+          <span className="text-amber-500 font-semibold text-xs tracking-widest uppercase mb-1 block">
+            Delivery Details
+          </span>
+          <h1 className="text-3xl font-extrabold text-white font-serif-display">
+            Checkout
+          </h1>
+          <p className="text-zinc-400 text-sm mt-1">
+            Complete your order to enjoy authentic Ethiopian food hot and fresh.
+          </p>
+        </div>
         <CheckoutForm />
       </div>
     </div>
