@@ -1,10 +1,20 @@
-import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { getSession } from "../lib/session";
 import CheckoutForm from "./CheckoutForm";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Checkout",
+  description: "Complete your authentic Ethiopian meal order with secure checkout.",
+};
+
 export default async function CheckoutPage() {
-  await cookies();
+  const session = await getSession();
+
+  if (!session) {
+    redirect("/signin?next=/checkout");
+  }
 
   return (
     <div className="min-h-[calc(100vh-140px)] bg-[#111111] text-white flex items-center justify-center px-4 py-12">

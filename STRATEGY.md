@@ -1,10 +1,14 @@
-# Addis Eats - Route Rendering Strategies
+# Addis Eats - Rendering Strategy
 
 | Route | Strategy | Reason |
 | :--- | :--- | :--- |
-| `/` | Static (SSG) | Landing page content is static and identical for all visitors. |
-| `/menu` | Incremental Static Regeneration (ISR - 60s) | Menu items and availability change periodically, benefiting from cached static performance with automated background revalidation. |
-| `/menu/[id]` | Static Site Generation (SSG via `generateStaticParams`) | All dish IDs and item details are known ahead of time, allowing pre-rendering of individual pages at build time. |
-| `/cart` | Static (Client-Hydrated) | The cart layout shell is static, while dynamic item state is managed client-side. |
-| `/checkout` | Dynamic (Server-Rendered on Demand) | Requires reading request-time cookies, session credentials, and user-specific headers for processing orders. |
-| `/home` | Static (SSG) | Static informational welcome page that does not depend on request parameters or external mutations. |
+| `/` | Static (SSG) | Landing page marketing and specials are identical for all visitors. |
+| `/menu` | ISR (3600s) | Dishes change a few times a day and should remain fast, cacheable, and indexable. |
+| `/menu/[id]` | Static via params | Known dish IDs are pre-rendered at build time with generateStaticParams. |
+| `/cart` | Static shell (Client-hydrated) | Shell is static while order item lines and totals remain in client store. |
+| `/checkout` | Dynamic (Server-rendered on demand) | Protected write route reading session cookie and processing user transactions. |
+| `/orders` | Dynamic (Server-rendered on demand) | Private dashboard scoped to authenticated session with live polling. |
+| `/kitchen` | Dynamic (Server-rendered on demand) | Private operational board restricted to staff with kitchen role. |
+| `/signin` | Dynamic (Server-rendered on demand) | Handles credentials and sanitizes destination redirect parameters. |
+| `/sitemap.xml` | Static | Generated from public dish catalog; private paths are excluded. |
+| `/robots.txt` | Static | Fixed crawler rules defining public indexing and private disallowed routes. |

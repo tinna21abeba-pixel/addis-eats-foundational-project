@@ -27,8 +27,20 @@ const caveat = Caveat({
 });
 
 export const metadata = {
-  title: "Addis Eats | Authentic Ethiopian Food",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://addiseats.com"),
+  title: {
+    default: "Addis Eats | Authentic Ethiopian Food",
+    template: "%s | Addis Eats",
+  },
   description: "Experience the true taste of Ethiopia with authentic traditional dishes delivered fresh.",
+  openGraph: {
+    title: "Addis Eats | Authentic Ethiopian Food",
+    description: "Experience the true taste of Ethiopia with authentic traditional dishes delivered fresh.",
+    url: "https://addiseats.com",
+    siteName: "Addis Eats",
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }) {

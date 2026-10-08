@@ -34,7 +34,7 @@ export default function CheckoutForm() {
           Your order number is <span className="font-bold text-amber-400">{state.orderId}</span>. Our kitchen is now preparing your meal.
         </p>
         <Link
-          href="/orders/mine"
+          href="/orders"
           className="inline-flex items-center gap-2 bg-[#e59e2a] hover:bg-[#d48e1d] transition px-7 py-3 rounded-full font-bold text-sm text-zinc-950 shadow-md shadow-amber-500/20"
         >
           <span>View My Orders</span>

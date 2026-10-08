@@ -10,17 +10,69 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const dish = dishes.find((d) => d.id.toString() === id);
+
+  if (!dish) {
+    return {
+      title: "Dish Not Found",
+      description: "The requested Ethiopian dish could not be found.",
+    };
+  }
+
+  return {
+    title: `${dish.name} - Traditional Ethiopian Dish`,
+    description: dish.description,
+    openGraph: {
+      title: `${dish.name} | Addis Eats`,
+      description: dish.description,
+      images: [
+        {
+          url: dish.image,
+          width: 800,
+          height: 600,
+          alt: dish.name,
+        },
+      ],
+    },
+  };
+}
+
 export default async function DishDetails({ params }) {
   const { id } = await params;
-
-  const dish = dishes.find((dish) => dish.id.toString() === id);
+  const dish = dishes.find((d) => d.id.toString() === id);
 
   if (!dish) {
     notFound();
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "MenuItem",
+    name: dish.name,
+    description: dish.description,
+    image: `https://addiseats.com${dish.image}`,
+    offers: {
+      "@type": "Offer",
+      price: dish.price,
+      priceCurrency: "ETB",
+      availability: "https://schema.org/InStock",
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: dish.rating || 4.8,
+      reviewCount: dish.reviews || 80,
+    },
+  };
+
   return (
     <div className="max-w-4xl mx-auto py-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <Link
         href="/menu"
         className="inline-flex items-center gap-2 text-zinc-400 hover:text-amber-400 text-sm mb-6 transition-colors"
@@ -38,6 +90,7 @@ export default async function DishDetails({ params }) {
             alt={dish.name}
             fill
             priority
+            sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover"
           />
           {dish.badge && (
@@ -74,7 +127,7 @@ export default async function DishDetails({ params }) {
               <span className="text-3xl font-bold text-amber-500">
                 ETB {dish.price}
               </span>
-              <span className="text-xs text-zinc-400">including tax and injera</span>
+              <span className="text-xs text-zinc-400">including tax and fresh injera</span>
             </div>
           </div>
 

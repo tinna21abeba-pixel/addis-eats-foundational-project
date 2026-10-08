@@ -16,17 +16,14 @@ export default function Header() {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/menu?category=All&q=${encodeURIComponent(searchQuery.trim())}`);
-    } else {
-      router.push("/menu");
-    }
+    router.push("/menu");
   };
 
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Menu", href: "/menu" },
     { name: "Orders", href: "/orders" },
+    { name: "Kitchen", href: "/kitchen" },
   ];
 
   return (
@@ -116,21 +113,18 @@ export default function Header() {
                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
               />
             </svg>
-            {cartCount > 0 ? (
+            {cartCount > 0 && (
               <span className="absolute -top-0.5 -right-0.5 bg-rose-600 text-white font-bold text-[11px] rounded-full min-w-5 h-5 px-1 flex items-center justify-center shadow-md">
                 {cartCount}
-              </span>
-            ) : (
-              <span className="absolute -top-0.5 -right-0.5 bg-rose-600 text-white font-bold text-[11px] rounded-full min-w-5 h-5 px-1 flex items-center justify-center shadow-md">
-                2
               </span>
             )}
           </Link>
 
           <Link
-            href="/orders/mine"
+            href="/signin"
             className="p-2 text-zinc-300 hover:text-amber-400 hover:bg-zinc-800/60 rounded-full transition"
-            aria-label="User Profile"
+            aria-label="User Account"
+            title="Account / Sign In"
           >
             <svg
               className="w-6 h-6"
@@ -175,15 +169,13 @@ export default function Header() {
               {link.name}
             </Link>
           ))}
-          <form onSubmit={handleSearchSubmit} className="mt-2 px-3">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search dishes..."
-              className="w-full bg-[#222120] text-sm text-zinc-200 placeholder-zinc-500 px-4 py-2 rounded-full border border-zinc-700/60 focus:outline-none"
-            />
-          </form>
+          <Link
+            href="/signin"
+            onClick={() => setMobileMenuOpen(false)}
+            className="px-3 py-2 rounded-lg text-sm font-medium text-amber-400 hover:bg-zinc-800"
+          >
+            Sign In / Switch Role
+          </Link>
         </div>
       )}
     </header>

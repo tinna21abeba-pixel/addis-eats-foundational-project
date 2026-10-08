@@ -3,6 +3,11 @@ import Image from "next/image";
 import dishes from "./data/dishes";
 import AddToCartButton from "./menu/AddToCartButton";
 
+export const metadata = {
+  title: "Authentic Ethiopian Food & Delivery",
+  description: "Experience the true taste of Ethiopia with authentic traditional dishes delivered fresh to your doorstep.",
+};
+
 export default function HomePage() {
   const featuredDishes = [
     dishes.find((d) => d.name === "Doro Wat") || dishes[1],

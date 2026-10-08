@@ -1,5 +1,10 @@
 import CartView from "./CartView";
 
+export const metadata = {
+  title: "Your Cart",
+  description: "Review your selected authentic Ethiopian dishes and proceed to checkout.",
+};
+
 export default function CartPage() {
   return (
     <div className="min-h-[calc(100vh-140px)] bg-[#111111] text-white flex items-center justify-center px-4 py-12">
